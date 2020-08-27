@@ -1,6 +1,6 @@
 {
   "name": "zjlab",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "zjlab fe cli for vuejs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,10 @@
     "cli",
     "vue"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:lidasong/zjlab.git"
+  },
   "bin": {
     "zjlab": "bin/zjlab.js",
     "zjlab-service": "bin/zjlab-service.js"
