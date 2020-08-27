@@ -1,6 +1,6 @@
 {
   "name": "zjlab",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "zjlab fe cli for vuejs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,8 @@
     "vue"
   ],
   "bin": {
-    "zjlab": "bin/zjlab.js"
+    "zjlab": "bin/zjlab.js",
+    "zjlab-service": "bin/zjlab-service.js"
   },
   "author": "zjlab fe fellowers",
   "license": "ISC",

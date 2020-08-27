@@ -3,7 +3,7 @@
 /**
  * vue-cli
  */
-const { chalk, semver, execa, error } = require('@vue/cli-shared-utils')
+const { chalk, semver } = require('@vue/cli-shared-utils')
 const requiredVersion = require('@vue/cli/package.json').engines.node
 const leven = require('leven')
 const inquirer = require('inquirer')
@@ -58,7 +58,7 @@ const program = require('commander')
 const loadCommand = require('@vue/cli/lib/util/loadCommand')
 
 program
-  .version(`@vue/cli ${require('@vue/cli/package').version}`)
+  .version(`zjlab ${require('../package').version}`)
   .usage('<command> [options]')
 
 program
@@ -129,13 +129,16 @@ program
       ])
       template = choice.template
       if (template !== 'default') {
+        if(fs.existsSync(name)) {
+          console.log(chalk.red(`the folder ${chalk.cyan.bold(name)} has existed, please ensure your app-name`))
+          process.exit()
+        }
         await del(name)
         fs.mkdirSync(name)
         await fetchRemote(template, name)
         await del(`${name}/.git`)
         await installDeps(name)
         process.exit()
-        return
       }
     }
 
@@ -288,8 +291,7 @@ program
       )
       .then(console.log)
   })
-program.command('serve').description('serve development')
-program.command('build').description('build bundle files for production')
+
 // output help information on unknown commands
 program.arguments('<command>').action((cmd) => {
   program.outputHelp()
@@ -370,36 +372,4 @@ function cleanArgs(cmd) {
     }
   })
   return args
-}
-
-/**
- * cli-service
- */
-
-const Service = require('@vue/cli-service/lib/Service')
-const service = new Service(process.env.VUE_CLI_CONTEXT || process.cwd())
-
-const rawArgv = process.argv.slice(2)
-const args = require('minimist')(rawArgv, {
-  boolean: [
-    // build
-    'modern',
-    'report',
-    'report-json',
-    'inline-vue',
-    'watch',
-    // serve
-    'open',
-    'copy',
-    'https',
-    // inspect
-    'verbose'
-  ]
-})
-const command = args._[0]
-if (['serve', 'build'].includes(command)) {
-  service.run(command, args, rawArgv).catch((err) => {
-    error(err)
-    process.exit(1)
-  })
 }
