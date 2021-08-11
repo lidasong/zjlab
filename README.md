@@ -8,8 +8,11 @@ and zjlab cli is just one cli, do all things, includes create/lint/develop/build
 ## What Zjlab Cli Do
 
 * init project
+
   From now on, zjlab can init multiple projects for different applications.Includes mobile H5 application,backend website application,saber application for IOC and vue default applications.
+
 * front-end project specification
+
   With the cli we can simplify almost all specification works.
   Includes directory structure,develop,lint,commit,build and so on.
 
